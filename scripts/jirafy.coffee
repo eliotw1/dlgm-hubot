@@ -22,7 +22,7 @@ module.exports = (robot) ->
     for key in Object.keys(keys)
       addListener key
   
-  robot.respond /jirafy \b(\w+)\b \b(.+)\b/i, (msg) ->
+  robot.respond /jirafy \b(\w+)\b ([^\s]+)/i, (msg) ->
     key = msg.match[1]
     addKey key, msg.match[2]
     addListener key
