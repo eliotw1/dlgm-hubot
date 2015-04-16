@@ -17,21 +17,28 @@ jirafy_key = (key) ->
   "jirafy-#{key}"
 
 module.exports = (robot) ->
+  loaded = false
+  
   robot.brain.on 'loaded', (data = {}) ->
-    keys = robot.brain.get(jirafy_key("keys")) || {}
-    for key in Object.keys(keys)
-      addListener key
+    if not loaded
+      loaded = true
+      keys = robot.brain.get(jirafy_key("keys")) || {}
+      for key in Object.keys(keys)
+        addListener key
   
   robot.respond /jirafy \b(\w+)\b ([^\s]+)/i, (msg) ->
+    loaded = true
     key = msg.match[1]
-    oldKey = keys[key]
     addKey key, msg.match[2]
-    addListener key if not oldKey
-    
+  
   addListener = (key) ->
     robot.hear new RegExp("#{key}\\-\\d+", "i"), (msg) ->
+      keys = robot.brain.get(jirafy_key("keys")) || {}
       msg.send "#{keys[key]}#{msg.match[0]}"
   
   addKey = (key, url) ->
+    keys = robot.brain.get(jirafy_key("keys")) || {}
+    oldKey = keys[key]
     keys[key] = url
     robot.brain.set jirafy_key("keys"), keys
+    addListener key if not oldKey
