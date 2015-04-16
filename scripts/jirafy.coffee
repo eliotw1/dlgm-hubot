@@ -18,14 +18,16 @@ jirafy_key = (key) ->
 
 module.exports = (robot) ->
   keys = robot.brain.get(jirafy_key("keys")) || {}
-  if keys
-    for key in Object.keys(keys)
-      addListener key
+  console.log(keys)
+  for key in Object.keys(keys)
+    console.log(key)
+    addListener key
   
   robot.respond /jirafy \b(\w+)\b ([^\s]+)/i, (msg) ->
     key = msg.match[1]
+    oldKey = keys[key]
     addKey key, msg.match[2]
-    addListener key
+    addListener key if not oldKey
     
   addListener = (key) ->
     robot.hear new RegExp("#{key}\\-\\d+", "i"), (msg) ->
