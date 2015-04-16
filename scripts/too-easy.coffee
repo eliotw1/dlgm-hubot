@@ -13,7 +13,6 @@
 #   Jake Payton
 
  module.exports = (robot) ->
-   robot.hear /(ship it|validation|Mike|Miguel)/i, (msg) ->
-     msg.send "#{msg.message.user.name} says Tooooo Easy!!!!"
-   robot.hear /(Frank)/i, (msg) ->
-     msg.send "Franky is Cranky #{msg.message.user.name}!"
+
+  robot.respond /radiator/i, (msg) ->
+     msg.send "http://bit.ly/1zWRMLJ Too easy #{msg.message.user.name}"
