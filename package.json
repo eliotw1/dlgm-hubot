@@ -21,10 +21,12 @@
     "url": "https://github.com/github/hubot.git"
   },
   "dependencies": {
+    "hipchatter": "~0.1",
     "hubot": "2.11.0",
     "hubot-hipchat": "2.7.5",
     "hubot-scripts": "2.5.16",
     "hubot-cron": "0.2.7",
+    "request": "~2.51",
     "underscore": "1.7.0"
   },
   "engines": {
