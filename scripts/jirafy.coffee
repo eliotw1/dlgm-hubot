@@ -17,11 +17,10 @@ jirafy_key = (key) ->
   "jirafy-#{key}"
 
 module.exports = (robot) ->
-  keys = robot.brain.get(jirafy_key("keys")) || {}
-  console.log(keys)
-  for key in Object.keys(keys)
-    console.log(key)
-    addListener key
+  robot.brain.on 'loaded', (data = {}) ->
+    keys = robot.brain.get(jirafy_key("keys")) || {}
+    for key in Object.keys(keys)
+      addListener key
   
   robot.respond /jirafy \b(\w+)\b ([^\s]+)/i, (msg) ->
     key = msg.match[1]
