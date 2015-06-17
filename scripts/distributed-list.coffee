@@ -33,7 +33,7 @@ module.exports = (robot) ->
     listName = msg.match[1]
     
     if getList(msg, listName)?
-      addToList(msg, listName)
+      addToList(msg, userName(msg), listName)
       msg.send "#{userName(msg)} has been added to ##{listName}"
     else
       msg.send "##{listName} has not been created"
@@ -43,8 +43,29 @@ module.exports = (robot) ->
     listName = msg.match[1]
     
     if getList(msg, listName)?
-      removeFromList(msg, listName)
+      removeFromList(msg, userName(msg), listName)
       msg.send "#{userName(msg)} has been removed from ##{listName}"
+    else
+      msg.send "##{listName} has not been created"
+      
+  robot.respond /add (.+) to #([\w]+)$/i, (msg) ->
+    skipTheHear = true
+    username = msg.match[1]
+    listName = msg.match[2]
+    
+    if getList(msg, listName)?
+      addToList(msg, username, listName)
+      msg.send "#{userName} has been added to ##{listName}"
+    else
+      msg.send "##{listName} has not been created"
+      
+  robot.respond /remove (.+) from #([\w]+)$/i, (msg) ->
+    skipTheHear = true
+    listName = msg.match[1]
+    
+    if getList(msg, listName)?
+      removeFromList(msg, username, listName)
+      msg.send "#{userName} has been removed from ##{listName}"
     else
       msg.send "##{listName} has not been created"
 
@@ -67,18 +88,18 @@ getList = (msg, name) ->
 addList = (msg, name) ->
   msg.robot.brain.set listKey(name), []
   
-addToList = (msg, name) ->
-  list = getList msg, name
-  if list.indexOf userName(msg) == -1
-    list.push userName(msg)
+addToList = (msg, name, listname) ->
+  list = getList msg, listname
+  if list.indexOf name == -1
+    list.push name
     msg.robot.brain.set listKey(name), list
     
 userName = (msg) ->
   "@#{msg.envelope.user.mention_name}"
 
-removeFromList = (msg, name) ->
-  list = getList msg, name
-  indexOfUserName = list.indexOf userName(msg)
+removeFromList = (msg, name, listname) ->
+  list = getList msg, listname
+  indexOfUserName = list.indexOf name
   if indexOfUserName  >= 0
     list.splice indexOfUserName, 1
     msg.robot.brain.set listKey(name), list
