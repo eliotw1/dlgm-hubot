@@ -27,30 +27,13 @@ module.exports = (robot) ->
     else
       addList(msg, listName)
       msg.send "##{listName} was created"
-
-  robot.respond /add me to #([\w]+)$/i, (msg) ->
-    skipTheHear = true
-    listName = msg.match[1]
-    
-    if getList(msg, listName)?
-      addToList(msg, userName(msg), listName)
-      msg.send "#{userName(msg)} has been added to ##{listName}"
-    else
-      msg.send "##{listName} has not been created"
-      
-  robot.respond /remove me from #([\w]+)$/i, (msg) ->
-    skipTheHear = true
-    listName = msg.match[1]
-    
-    if getList(msg, listName)?
-      removeFromList(msg, userName(msg), listName)
-      msg.send "#{userName(msg)} has been removed from ##{listName}"
-    else
-      msg.send "##{listName} has not been created"
       
   robot.respond /add (.+) to #([\w]+)$/i, (msg) ->
     skipTheHear = true
     username = msg.match[1]
+    if username == "me"
+      username = userName(msg)
+    
     listName = msg.match[2]
     
     if getList(msg, listName)?
@@ -58,10 +41,13 @@ module.exports = (robot) ->
       msg.send "#{username} has been added to ##{listName}"
     else
       msg.send "##{listName} has not been created"
-      
+
   robot.respond /remove (.+) from #([\w]+)$/i, (msg) ->
     skipTheHear = true
     username = msg.match[1]
+    if username == "me"
+      username = userName(msg)
+    
     listName = msg.match[2]
     
     if getList(msg, listName)?
@@ -77,8 +63,7 @@ module.exports = (robot) ->
       listName = msg.match[1]
       names = getUserNamesForList(msg, listName)
       if names.length > 0
-        msg.send "^ #{names}"
-      
+        msg.send "^ #{names.join(", ")}"
 
 listKey = (name) ->
   "distributedList#{name.toLowerCase()}"
