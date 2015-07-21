@@ -55,17 +55,18 @@ module.exports = (robot) ->
     
     if getList(msg, listName)?
       addToList(msg, username, listName)
-      msg.send "#{userName} has been added to ##{listName}"
+      msg.send "#{username} has been added to ##{listName}"
     else
       msg.send "##{listName} has not been created"
       
   robot.respond /remove (.+) from #([\w]+)$/i, (msg) ->
     skipTheHear = true
-    listName = msg.match[1]
+    username = msg.match[1]
+    listName = msg.match[2]
     
     if getList(msg, listName)?
       removeFromList(msg, username, listName)
-      msg.send "#{userName} has been removed from ##{listName}"
+      msg.send "#{username} has been removed from ##{listName}"
     else
       msg.send "##{listName} has not been created"
 
@@ -76,7 +77,7 @@ module.exports = (robot) ->
       listName = msg.match[1]
       names = getUserNamesForList(msg, listName)
       if names.length > 0
-        msg.send "^#{names}"
+        msg.send "^ #{names}"
       
 
 listKey = (name) ->
