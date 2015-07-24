@@ -63,7 +63,7 @@ module.exports = (robot) ->
       listName = msg.match[1]
       names = getUserNamesForList(msg, listName)
       if names.length > 0
-        msg.send "^ #{names.join(", ")}"
+        msg.send "^ #{names}"
 
 listKey = (name) ->
   "distributedList#{name.toLowerCase()}"
@@ -92,4 +92,4 @@ removeFromList = (msg, name, listname) ->
     
 getUserNamesForList = (msg, name) ->
   list = getList msg, name
-  list.toString()
+  list.join(", ")
