@@ -16,7 +16,7 @@
 
 
 target = "eliot"
-targetID = 99999
+targetID = 1
 
 module.exports = (robot) ->
 
