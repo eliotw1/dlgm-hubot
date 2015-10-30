@@ -26,7 +26,7 @@ module.exports = (robot) ->
         console.log targetID
         console.log msg.message.user
         msg.send "DAMMIT, @#{target}!!!!!!"
-        msg.send "@#{target}------"
+        msg.send "@#{target}--"
 
         # console.log msg.message.user
 
@@ -38,7 +38,7 @@ module.exports = (robot) ->
         msg.send "@#{target}++"
 
     else
-        msg.send "Wait, is that Raj?"
-        msg.send "@#{target}++++++"
+        msg.send "Wait... is that Raj?"
+        msg.send "@#{target}++"
 
         console.log msg.message.user
