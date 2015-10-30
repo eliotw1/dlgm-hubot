@@ -15,7 +15,7 @@
 #   eliot
 
 
-target = "eliot"
+target = "Eliot"
 targetID = 1
 
 module.exports = (robot) ->
@@ -23,8 +23,6 @@ module.exports = (robot) ->
   robot.hear /[+-]{11}$/, (msg) ->
     if (msg.message.user.name == target)
         targetID = msg.message.user.id
-        console.log targetID
-        console.log msg.message.user
         msg.send "DAMMIT, @#{target}!!!!!!"
         msg.send "@#{target}--"
 
@@ -32,13 +30,11 @@ module.exports = (robot) ->
 
     else if (msg.message.user.id == targetID)
         target = msg.message.user.name
-        console.log target
-        console.log msg.message.user
         msg.send "Clever, @#{target}. You changed your name!"
         msg.send "@#{target}++"
 
     else
-        msg.send "Wait... is that Raj?"
-        msg.send "@#{target}++"
+        target = msg.message.user.name
+        targetID = msg.message.user.id
+        msg.send "@#{target}, userID: #{targetID}, this is the karma police. You've been warned for karma bombing"
 
-        console.log msg.message.user
