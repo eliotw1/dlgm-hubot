@@ -15,7 +15,7 @@
 #   eliot
 
 
-target = "bluejays"
+target = "Eliot Williams"
 targetID = 1
 
 module.exports = (robot) ->
@@ -29,12 +29,12 @@ module.exports = (robot) ->
         # console.log msg.message.user
 
     else if (msg.message.user.id == targetID)
-        target = msg.message.user.name
+        target = msg.message.user
         msg.send "Clever, @#{target}. You changed your name!"
         msg.send "@#{target}++"
 
     else
-        target = msg.message.user.name
+        target = msg.message.user
         targetID = msg.message.user.id
         msg.send "@#{target}, userID: #{targetID}, this is the karma police. You've been warned for karma bombing"
 
