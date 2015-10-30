@@ -1,5 +1,6 @@
 # Description:
 #   Karma Police
+#   An attempt to "police" karma bombing
 #
 # Dependencies:
 #   None
@@ -8,7 +9,7 @@
 #   None
 #
 # Commands:
-#   attempt to "police" karma bombing
+#   
 #
 # Author:
 #   eliot
