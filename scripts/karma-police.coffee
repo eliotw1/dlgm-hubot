@@ -8,18 +8,18 @@
 #   None
 #
 # Commands:
-#   attempt to prevent Raj from karma bombing
+#   attempt to "police" karma bombing
 #
 # Author:
 #   eliot
 
 
-target = "bluejays"
+target = "eliot"
 targetID = 99999
 
 module.exports = (robot) ->
 
-  robot.hear /[+-]{5}$/, (msg) ->
+  robot.hear /[+-]{11}$/, (msg) ->
     if (msg.message.user.name == target)
         targetID = msg.message.user.id
         console.log targetID
@@ -33,11 +33,11 @@ module.exports = (robot) ->
         target = msg.message.user.name
         console.log target
         console.log msg.message.user
-        msg.send "DAMMIT, @#{target}!!!!!!"
-        msg.send "@#{target}------"
+        msg.send "Clever, @#{target}. You changed your name!"
+        msg.send "@#{target}++"
 
     else
-        msg.send "Wait, is that @#{target}?"
+        msg.send "Wait, is that Raj?"
         msg.send "@#{target}++++++"
 
         console.log msg.message.user
