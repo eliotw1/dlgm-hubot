@@ -20,18 +20,17 @@ targetID = 1
 
 module.exports = (robot) ->
 
-  robot.hear /[+-]{11}$/, (msg) ->
+  robot.hear /[+-]{21}$/, (msg) ->
     if (msg.message.user.name == target)
         targetID = msg.message.user.id
-        msg.send "DAMMIT, @#{target}!!!!!!"
+        msg.send "DAMMIT, #{target}, you've been cited for karma bombing!!!!!!"
         msg.reply "--"
 
         # console.log msg.message.user
 
     else if (msg.message.user.id == targetID)
         target = msg.message.user.name
-        msg.send "Clever, @#{target}. You changed your name!"
-        msg.reply "++"
+        msg.reply "++. You can change your name to #{target}, but you are still on the karma bomber watch list."
 
     else
         target = msg.message.user.name
