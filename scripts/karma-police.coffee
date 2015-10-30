@@ -24,17 +24,17 @@ module.exports = (robot) ->
     if (msg.message.user.name == target)
         targetID = msg.message.user.id
         msg.send "DAMMIT, @#{target}!!!!!!"
-        msg.send "@#{target}--"
+        msg.reply "--"
 
         # console.log msg.message.user
 
     else if (msg.message.user.id == targetID)
-        target = msg.message.user
+        target = msg.message.user.name
         msg.send "Clever, @#{target}. You changed your name!"
-        msg.send "@#{target}++"
+        msg.reply "++"
 
     else
-        target = msg.message.user
+        target = msg.message.user.name
         targetID = msg.message.user.id
-        msg.send "@#{target}, userID: #{targetID}, this is the karma police. You've been warned for karma bombing"
+        msg.send "#{target}, userID: #{targetID}, this is the karma police. You've been warned for karma bombing"
 
