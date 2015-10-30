@@ -15,7 +15,7 @@
 #   eliot
 
 
-target = "Eliot"
+target = "bluejays"
 targetID = 1
 
 module.exports = (robot) ->
